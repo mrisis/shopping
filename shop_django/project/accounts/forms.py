@@ -34,10 +34,10 @@ class UserchangeForm(forms.ModelForm):
 
 
 class RegisterationForm(forms.Form):
-    email = forms.EmailField()
-    full_name=forms.CharField(label='full name ',max_length=100)
-    phone_number = forms.CharField(label='phone',max_length=11)
-    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(label='',widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}))
+    full_name=forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Full Name'}))
+    phone_number = forms.CharField(label='',max_length=11,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Phone Number'}))
+    password = forms.CharField(label='',widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'}))
 
 
 
