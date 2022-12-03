@@ -9,7 +9,7 @@
         {% for product in products %}
             <div class="col-lg-4 col-md-6 gy-3 mb-2">
                 <div class="card" style="width: 20rem;" >
-                    <img  src="{{ product.image.url }}" alt="photo product">
+                    <img class="img-fluid" src="{{ product.image.url }}" alt="photo product">
                     <div class="card-body" >
                         <a href="{{ product.get_absolute_url }}" class="btn btn-dark"> Detail & Buy</a>
                     </div>
