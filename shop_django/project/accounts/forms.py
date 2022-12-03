@@ -41,7 +41,8 @@ class RegisterationForm(forms.Form):
 
 
 
-
+class VerifyCodeForm(forms.Form):
+    code = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control','palceholder':'code'}))
 
 
 
