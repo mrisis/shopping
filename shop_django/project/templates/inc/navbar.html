@@ -6,6 +6,9 @@
             <a class="nav-link active" href="{% url 'home:home' %}">Home</a>
             <a class="nav-link active" href="{% url 'accounts:user_register' %}">Sign Up</a>
             <a class="nav-link active" href="{% url 'home:menu' %}">Menu</a>
+            {% if request.user.is_admin %}
+                <a class="nav-link active" href="{% url 'home:bucket' %}">Bucket</a>
+            {% endif %}
 
         </div>
 
