@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,34 @@ MEDIA_ROOT= BASE_DIR/'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL= 'accounts.User'
+
+#Arvan Cloud Storages Config
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = '76acabe6-2931-4a04-845f-69b90f1e75e1'
+AWS_SECRET_ACCESS_KEY = 'e659dc6649b69a05ce49bf72fb8a9a7341c7d9b8'
+AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.com'
+AWS_STORAGE_BUCKET_NAME = 'shop-django-rezaamin'
+AWS_SERVICE_NAME = 's3'
+AWS_S3_FILE_OVERWRITE =False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
