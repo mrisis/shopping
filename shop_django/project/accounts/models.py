@@ -26,4 +26,15 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 
+#--------------------------------------------
+
+#create Otp model for send sms and verify user
+
+class OtpCode(models.Model):
+    phone_number=models.CharField(max_length=11)
+    code = models.PositiveSmallIntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.phone_number} - {self.code} - {self.created}'
 
