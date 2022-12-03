@@ -7,7 +7,7 @@ class UserRegisterView(View):
     form_class = RegisterationForm
     def get(self,request):
         form = self.form_class
-        return render(request,'home/register.html',{'form':form})
+        return render(request,'accounts/register.html',{'form':form})
 
     def post(self,request):
         pass
