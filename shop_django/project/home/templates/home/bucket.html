@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+    Bucket
+{% endblock %}
+
+
+{% block body %}
+
+ <div >
+     <table class="table text-light">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Size</th>
+          <th scope="col">Download</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for obj in objects %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td class="text-light">{{ obj.name }}</td>
+              <td>{{ obj.size }}</td>
+              <td>download</td>
+              <td>delete</td>
+            </tr>
+          {% endfor %}
+
+      </tbody>
+    </table>
+ </div>
+
+{% endblock %}
