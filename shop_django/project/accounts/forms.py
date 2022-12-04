@@ -62,6 +62,9 @@ class VerifyCodeForm(forms.Form):
     code = forms.IntegerField(widget=forms.PasswordInput(attrs={'class':'form-control','palceholder':'code'}))
 
 
+class UserLoginForm(forms.Form):
+    phone_number = forms.CharField(max_length=11 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'phone number'}))
+    password = forms.CharField(max_length=100,widget=forms.PasswordInput(attrs={'class':'form-control' , 'placeholder':'password'}))
 
 
 
