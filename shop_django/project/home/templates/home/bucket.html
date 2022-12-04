@@ -7,7 +7,7 @@
 {% block body %}
 
  <div >
-     <table class="table text-light">
+     <table class="table table-dark">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -21,10 +21,10 @@
           {% for obj in objects %}
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
-              <td class="text-light">{{ obj.name }}</td>
-              <td>{{ obj.size }}</td>
+              <td >{{ obj.Key }}</td>
+              <td>{{ obj.Size }}</td>
               <td>download</td>
-              <td>delete</td>
+              <td><a href="{% url 'home:delete_obj_bucket' obj.Key %}">Delete</a></td>
             </tr>
           {% endfor %}
 
