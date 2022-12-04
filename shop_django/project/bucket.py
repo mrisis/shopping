@@ -23,6 +23,10 @@ class Bucket:
         result = self.connection.list_objects_v2(Bucket=settings.AWS_STORAGE_BUCKET_NAME)
         return result
 
+    def delete_object(self,key):
+        self.connection.delete_object(Bucket= settings.AWS_STORAGE_BUCKET_NAME , Key=key)
+        return True
+
 
 bucket = Bucket()
 
