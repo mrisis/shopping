@@ -5,6 +5,7 @@ from . tasks import  all_bucket_objects_task
 from . import tasks
 from django.contrib import messages
 from utils import IsAdminUserMixin
+from orders.forms import CardAddForm
 class HomeView(View):
     def get(self,request):
         return render(request,'home/home.html')
@@ -22,8 +23,9 @@ class MenuView(View):
 
 class ProductDetailView(View):
     def get(self,request,slug):
+        form=CardAddForm
         product = get_object_or_404(Product , slug=slug )
-        return render(request , 'home/detail.html' , {'product':product})
+        return render(request , 'home/detail.html' , {'product':product,'form':form})
 
 
 class BucketHome(IsAdminUserMixin,View):
