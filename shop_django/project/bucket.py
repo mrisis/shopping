@@ -1,6 +1,7 @@
 import boto3
 from django.conf import settings
 
+
 class Bucket:
     '''CDN Bucket manager
     init method creates manager
@@ -30,6 +31,7 @@ class Bucket:
     def download_object(self, key):
         with open(settings.AWS_LOCAL_STORAGE + key, 'wb') as f:
             self.conn.download_fileobj(settings.AWS_STORAGE_BUCKET_NAME, key, f)
+
 
 
 bucket = Bucket()
