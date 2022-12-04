@@ -1,6 +1,6 @@
 from django.shortcuts import render , get_object_or_404 , redirect
 from django.views import View
-from . models import Product
+from . models import Product , Category
 from . tasks import  all_bucket_objects_task
 from . import tasks
 from django.contrib import messages
@@ -11,9 +11,13 @@ class HomeView(View):
 
 
 class MenuView(View):
-    def get(self,request):
+    def get(self,request,category_slug=None):
         products = Product.objects.filter(availabel=True)
-        return render(request,'home/menu.html',{'products':products})
+        categories = Category.objects.filter(is_sub=False)
+        if category_slug:
+            category=Category.objects.get(slug=category_slug)
+            products = products.filter(category=category)
+        return render(request,'home/menu.html',{'products':products,'categories':categories})
 
 
 class ProductDetailView(View):
