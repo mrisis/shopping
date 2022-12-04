@@ -34,6 +34,11 @@ class DeleteBucketObject(View):
         messages.success(request,'bucket object successully deleted' , 'success')
         return redirect('home:bucket')
 
+class DownloadBucketObject(View):
+    def get(self,request,key):
+        tasks.download_object_task.delay(key)
+        messages.success(request,'bucket object successfully downloaded' , 'success')
+        return redirect('home:bucket')
 
 
 
