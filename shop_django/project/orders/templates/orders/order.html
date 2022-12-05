@@ -6,8 +6,10 @@
 
 {% block body %}
 
-    <h3>Check Out</h3>
-    <p>Total :{{ order.get_total_price }}</p>
+    <h3 class="text-light text-center" >Check Out</h3>
+    <p class="text-light text-center">Total :{{ order.get_total_price }}</p>
+    <a href="{% url 'order_pay' order.id %}" class="btn btn-outline-light" > Pay</a>
+
 
 
 {% endblock %}
