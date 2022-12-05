@@ -20,7 +20,7 @@
                         </div>
                         <p class="lead">{{ product.description }}</p>
                         <div class="d-flex">
-                            <form action="" method="post">
+                            <form action="{% url 'orders:cart_add' product.id %}" method="post">
                                 {% csrf_token %}
                                 <div class="row">
                                     {{ form.as_p }}
