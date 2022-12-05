@@ -3,7 +3,7 @@ from home.models import Product
 CART_SESSION_ID= 'cart'
 
 class Cart :
-    def __init__(self):
+    def __init__(self,request):
         self.session = request.session
         cart = self.session.get(CART_SESSION_ID)
         if not cart :
@@ -12,7 +12,7 @@ class Cart :
 
     def __iter__(self):
         product_ids = self.cart.keys()
-        products = Product.objects.filter(id=product_ids)
+        products = Product.objects.filter(id__in=product_ids)
         cart = self.cart.copy()
         for product in products:
             cart[str(product.id)]['product'] = product
@@ -30,4 +30,4 @@ class Cart :
         self.session.modified = True
 
     def get_total_price(self):
-        return sum(int(item['price'] * item['quantity']) for item in self.cart.values())
+        return sum(int(item['price']) * item['quantity'] for item in self.cart.values())
