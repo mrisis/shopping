@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'storages',
     'django_celery_beat',
     'orders.apps.OrdersConfig',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
