@@ -5,4 +5,37 @@
 
 {% block body %}
 
+    <div >
+     <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Unit Price</th>
+          <th scope="col">Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for item in cart %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td >{{ item.product }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>>{{ item.price }}</td>
+              <td>{{ item.totalprice }}</td>
+            </tr>
+          {% endfor %}
+          <tr>
+              <th scope="row">Total Price</th>
+              <td>Total Price</td>
+              <td colspan="4"></td>
+              <td>{{ cart.get_total_price }}</td>
+          </tr>
+      </tbody>
+    </table>
+ </div>
+
+
+
 {% endblock %}
