@@ -5,6 +5,7 @@ from . cart import Cart
 from home.models import Product
 from . forms import CardAddForm
 from . models import Order , OrderItem
+import json
 class CartView(View):
     def get(self,request):
         cart=Cart(request)
@@ -45,7 +46,35 @@ class OrderCreateView(LoginRequiredMixin,View):
 
         return redirect('orders:orders_detail',order.id)
 
+MERCHANT = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+ZP_API_REQUEST = "https://api.zarinpal.com/pg/v4/payment/request.json"
+ZP_API_VERIFY = "https://api.zarinpal.com/pg/v4/payment/verify.json"
+ZP_API_STARTPAY = "https://www.zarinpal.com/pg/StartPay/{authority}"
+description = "در این صفحه دیگه باید پول را بدی داداش"
+CallbackURL = 'http://127.0.0.1:8000/orders/verify/'
 
+
+class OrderPayView(LoginRequiredMixin,View):
+    def get(self,request,order_id):
+        order = Order.objects.get(id=order_id)
+        request.session['order_pay'] = {'order_id':order.id,}
+        req_data = {
+            'merchant':MERCHANT,
+            'ammount':order.get_total_price(),
+            'callback_url' : CallbackURL,
+            'description': description,
+            'metadata': {'mobile':request.user.phone_number , 'email':request.user.emil}
+
+        }
+        req_header = {'accept':'application/json'}
+        req = requests.post(url = ZP_API_REQUEST,data=json.dumps(req_data) , headers=req_header)
+        authority = req.json()['data']['authority']
+        if len(req.json()['errors']) == 0:
+            return redirect(ZP_API_STARTPAY.format(authority=authority))
+        else:
+            e_code = req.json()['errors']['code']
+            e_message = req.json()['errors']['message']
+            return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
 
 
 
