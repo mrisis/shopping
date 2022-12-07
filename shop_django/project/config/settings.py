@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'storages',
     'django_celery_beat',
     'ckeditor',
+    'crispy_forms',
+
     #local apps
     'orders.apps.OrdersConfig',
     'core.apps.CoreConfig',
@@ -49,6 +51,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
 
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -185,9 +189,11 @@ AWS_LOCAL_STORAGE = f'{BASE_DIR}/aws/'
 # google account
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'rezaamin8889@gamil.com'
+EMAIL_HOST_USER = 'parsa.ahmaripour@gmail.com'
+
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = 'znhxuqyximdxzxzu'
+EMAIL_HOST_PASSWORD = 'rnuwqhrhcgkwxotx'
+
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Reza Web Shop'
 
