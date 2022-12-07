@@ -50,9 +50,3 @@ class Product(models.Model):
 
 
 
-
-
-
-
-
-
