@@ -7,6 +7,8 @@ from . models import OtpCode , User
 import random
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.contrib.auth import views as auth_views
 
 class UserRegisterView(View):
     form_class = RegisterationForm
@@ -90,7 +92,10 @@ class UserProfileView(LoginRequiredMixin,View):
         return render(request,'accounts/profile.html',{'user':user})
 
 
-
+class UserPasswordResetView(auth_views.PasswordResetView):
+    template_name = 'accounts/password_reset_form.html'
+    success_url = reverse_lazy('accounts:password_reset_done')
+    email_template_name = 'accounts/password_reset_email.html'
 
 
 
