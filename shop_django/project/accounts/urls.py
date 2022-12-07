@@ -7,5 +7,6 @@ urlpatterns=[
     path('register/verify/' , views.UserRegisterVerifyView.as_view() , name='verify_code'),
     path('logout/' , views.UserLogout.as_view() , name='user_logout'),
     path('login/' , views.UserLoginView.as_view() , name='user_login'),
+    path('profile/<int:user_id>/' , views.UserProfileView.as_view() , name='user_profile'),
 
 ]

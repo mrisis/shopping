@@ -84,6 +84,10 @@ class UserLoginView(View):
         return render(request,self.template_name,{'form':form})
 
 
+class UserProfileView(LoginRequiredMixin,View):
+    def get(selfself,request,user_id):
+        user = User.objects.get(id=user_id)
+        return render(request,'accounts/profile.html',{'user':user})
 
 
 
