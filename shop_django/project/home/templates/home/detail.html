@@ -6,7 +6,7 @@
 
 {% block body %}
 
-               <!-- Product section-->
+
         <section class="py-5 text-light">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+
     <hr>
 
     {% for cm in comments %}
@@ -41,10 +41,20 @@
             <p class="card-body">{{ cm.body }}</p>
         </div>
         {% empty %}
-        <p class="lead"> Comment yet! </p>
+        <p class="lead text-white"> Comment yet! </p>
 
     {% endfor %}
 
+    {% if request.user.is_authenticated %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form_comment.as_p }}
+            <input type="submit" value="Send Comment" class="btn btn-info">
+
+        </form>
+    {% endif %}
+
+                </section>
 
 
 
