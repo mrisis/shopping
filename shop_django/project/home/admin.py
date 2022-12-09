@@ -1,7 +1,5 @@
 from django.contrib import admin
-
-from accounts import models
-from . models import Category,Product
+from . models import Category,Product , Comment
 from core.admin import BaseAdmin
 from django.contrib import admin
 
@@ -20,3 +18,18 @@ class ProductAdmin(BaseAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name','slug','is_sub','sub_category')
     prepopulated_fields = {'slug':('name',)}
+
+
+
+
+@admin.register(Comment)
+class CommentAdmin(BaseAdmin):
+    list_display = ['user' , 'product' , 'created' , 'is_deleted']
+
+
+
+
+
+
+
+
