@@ -33,6 +33,19 @@
                 </div>
             </div>
         </section>
+    <hr>
+
+    {% for cm in comments %}
+        <div class="card bg-info text-white">
+            <p class="card-header">{{ cm.user }} - {{ cm.creaed|timesince }}</p>
+            <p class="card-body">{{ cm.body }}</p>
+        </div>
+        {% empty %}
+        <p class="lead"> Comment yet! </p>
+
+    {% endfor %}
+
+
 
 
 
