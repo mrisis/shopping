@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from core.models import BaseModel
+from accounts.models import User
 
 class Category(models.Model):
     sub_category= models.ForeignKey('self',on_delete=models.CASCADE , related_name='scategory',null=True,blank=True)
@@ -39,6 +40,20 @@ class Product(BaseModel):
 
     def get_absolute_url(self):
         return reverse('home:product_detail',args=[self.slug])
+
+
+class Comment(BaseModel):
+    user = models.ForeignKey(User,on_delete=models.CASCADE , related_name='comments')
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='products_comments')
+    body = models.TextField(max_length=300)
+    replay = models.ForeignKey('Comment',on_delete=models.CASCADE ,related_name='replay_comments',null=True,blank=True)
+    is_replay = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.user} - {self.body[:50]}'
+
+
+
 
 
 
