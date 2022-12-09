@@ -3,9 +3,11 @@ from django.views import View
 from . models import Product , Category
 from . tasks import  all_bucket_objects_task
 from . import tasks
-from django.contrib import messages
+
 from utils import IsAdminUserMixin
 from orders.forms import CardAddForm
+from . forms import CommetnCreateForm
+from django.contrib import messages
 class HomeView(View):
     def get(self,request):
         return render(request,'home/home.html')
@@ -22,11 +24,25 @@ class MenuView(View):
 
 
 class ProductDetailView(View):
-    def get(self,request,slug):
+    form_class_comment= CommetnCreateForm
+
+    def setup(self, request, *args, **kwargs):
+        self.product_instance= get_object_or_404(Product,pk=kwargs['product_id'],slug=kwargs['slug'])
+        return super().setup(request,*args,**kwargs)
+    def get(self,request,*args,**kwargs):
         form=CardAddForm
-        product = get_object_or_404(Product , slug=slug )
+        product = get_object_or_404(Product , slug=kwargs['slug'] )
         comments = product.products_comments.filter(is_replay=False)
-        return render(request , 'home/detail.html' , {'product':product,'form':form,'comments':comments})
+        return render(request , 'home/detail.html' , {'product':product,'form':form,'comments':comments,'form_comment':self.form_class_comment})
+    def post(self,request,*args,**kwargs):
+        form = self.form_class_comment(request.POST)
+        if form.is_valid():
+            new_comment=form.save(commit=False)
+            new_comment.user= request.user
+            new_comment.product = self.product_instance
+            new_comment.save()
+            messages.success(request,'your comment successfully sended.' , 'success')
+            return redirect('home:product_detail',self.product_instance.id , self.product_instance.slug)
 
 
 class BucketHome(IsAdminUserMixin,View):
