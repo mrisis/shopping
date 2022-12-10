@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
     <script src="https://kit.fontawesome.com/5d2b8db846.js" crossorigin="anonymous"></script>
     <link rel="icon" href='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6OAQJOFGRQ686FXNzTrCQynojXQIOpBn6Mw&usqp=CAU' type="image/icon type">
-
+    {% block head %}
+    {% endblock %}
 </head>
-    {% block extra_headers %} {% endblock %}
+
 </head>
 <body class="bg-dark">
 
