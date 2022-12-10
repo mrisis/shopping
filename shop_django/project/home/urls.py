@@ -11,5 +11,6 @@ urlpatterns=[
     path('menu/',views.MenuView.as_view(), name='menu'),
     path('detail/<int:product_id>/<slug:slug>/', views.ProductDetailView.as_view() , name='product_detail'),
     path('category/<slug:slug_cateory>/' , views.MenuView.as_view(),name='category_filter'),
+    path('replay/<int:product_id>/<int:comment_id>/' , views.ProductAddReplayView.as_view(),name='add_replay'),
 
 ]
