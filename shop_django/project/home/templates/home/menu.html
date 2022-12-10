@@ -6,6 +6,19 @@
 
 {% block body %}
 
+        <div class="input-group ms-3">
+              <div class="form-outline">
+                  <form action="" method="get">
+                      {% csrf_token %}
+                      {{ form_search }}
+                  </form>
+              </div>
+              <button type="button" class="btn btn-primary py-0 px-2">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+
+        </div>
+
     {% for category in categories %}
 
         <div class="btn-group">
