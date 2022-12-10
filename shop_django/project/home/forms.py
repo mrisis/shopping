@@ -18,3 +18,7 @@ class CommentReplayForm(forms.ModelForm):
         widgets={
             'body':forms.Textarea(attrs={'class':'form-control w-25' , 'placeholder':'please enter your replay comment'})
         }
+
+
+class ProductSearchForm(forms.Form):
+    search = forms.CharField(label='',widget=forms.TextInput(attrs={'placeholder':'Search'}))
