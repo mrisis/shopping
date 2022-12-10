@@ -5,24 +5,28 @@ from . tasks import  all_bucket_objects_task
 from . import tasks
 from utils import IsAdminUserMixin
 from orders.forms import CardAddForm
-from . forms import CommetnCreateForm , CommentReplayForm
+from . forms import CommetnCreateForm , CommentReplayForm , ProductSearchForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 class HomeView(View):
     def get(self,request):
-        return render(request,'home/home.html')
+
+        return render(request,'home/home.html' ,)
 
 
 class MenuView(View):
     def get(self,request,category_slug=None):
+        form_search = ProductSearchForm
         products = Product.objects.filter(availabel=True)
+        if request.GET.get('search'):
+            products = products.filter(name__contains=request.GET['search'])
         categories = Category.objects.filter(is_sub=False)
         if category_slug:
             category=Category.objects.get(slug=category_slug)
             products = products.filter(category=category)
-        return render(request,'home/menu.html',{'products':products,'categories':categories})
+        return render(request,'home/menu.html',{'products':products,'categories':categories ,'form_search':form_search})
 
 
 class ProductDetailView(View):
