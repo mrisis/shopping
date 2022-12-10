@@ -7,5 +7,14 @@ class CommetnCreateForm(forms.ModelForm):
         model=Comment
         fields = ('body', )
         widgets ={
-            'body':forms.Textarea(attrs={'class':'form-control w-25','placaholder':'please enter your comment'})
+            'body':forms.Textarea(attrs={'class':'form-control w-25','placeholder':'please enter your comment'})
+        }
+
+
+class CommentReplayForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body',)
+        widgets={
+            'body':forms.Textarea(attrs={'class':'form-control w-25' , 'placeholder':'please enter your replay comment'})
         }
