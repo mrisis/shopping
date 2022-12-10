@@ -25,6 +25,8 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(BaseAdmin):
     list_display = ['user' , 'product' , 'created' , 'is_deleted']
+    raw_id_fields = ['user' , 'product' , 'replay']
+
 
 
 
