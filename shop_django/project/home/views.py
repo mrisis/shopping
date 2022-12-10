@@ -1,14 +1,15 @@
 from django.shortcuts import render , get_object_or_404 , redirect
 from django.views import View
-from . models import Product , Category
+from . models import Product , Category , Comment
 from . tasks import  all_bucket_objects_task
 from . import tasks
 from utils import IsAdminUserMixin
 from orders.forms import CardAddForm
-from . forms import CommetnCreateForm
+from . forms import CommetnCreateForm , CommentReplayForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
 class HomeView(View):
     def get(self,request):
         return render(request,'home/home.html')
@@ -26,6 +27,7 @@ class MenuView(View):
 
 class ProductDetailView(View):
     form_class_comment= CommetnCreateForm
+    form_replay=CommentReplayForm
 
     def setup(self, request, *args, **kwargs):
         self.product_instance= get_object_or_404(Product,pk=kwargs['product_id'],slug=kwargs['slug'])
@@ -34,7 +36,7 @@ class ProductDetailView(View):
         form=CardAddForm
         product = get_object_or_404(Product , slug=kwargs['slug'] )
         comments = product.products_comments.filter(is_replay=False)
-        return render(request , 'home/detail.html' , {'product':product,'form':form,'comments':comments,'form_comment':self.form_class_comment})
+        return render(request , 'home/detail.html' , {'product':product,'form':form,'comments':comments,'form_comment':self.form_class_comment,'replay_form':self.form_replay})
     @method_decorator(login_required)
     def post(self,request,*args,**kwargs):
         form = self.form_class_comment(request.POST)
@@ -65,6 +67,24 @@ class DownloadBucketObject(IsAdminUserMixin,View):
         tasks.download_object_task.delay(key)
         messages.success(request,'bucket object successfully downloaded' , 'success')
         return redirect('home:bucket')
+
+
+class ProductAddReplayView(LoginRequiredMixin,View):
+    form_class = CommentReplayForm
+    def post(self,request,product_id,comment_id):
+        product = get_object_or_404(Product,id=product_id)
+        comment = get_object_or_404(Comment , id=comment_id)
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            replay = form.save(commit=False)
+            replay.user = request.user
+            replay.product = product
+            replay.replay=comment
+            replay.is_replay = True
+            replay.save()
+            messages.success(request,'your replay successfully sended.')
+
+        return redirect('home:product_detail',product.id,product.slug)
 
 
 
