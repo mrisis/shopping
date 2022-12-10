@@ -3,11 +3,12 @@ from django.views import View
 from . models import Product , Category
 from . tasks import  all_bucket_objects_task
 from . import tasks
-
 from utils import IsAdminUserMixin
 from orders.forms import CardAddForm
 from . forms import CommetnCreateForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 class HomeView(View):
     def get(self,request):
         return render(request,'home/home.html')
@@ -34,6 +35,7 @@ class ProductDetailView(View):
         product = get_object_or_404(Product , slug=kwargs['slug'] )
         comments = product.products_comments.filter(is_replay=False)
         return render(request , 'home/detail.html' , {'product':product,'form':form,'comments':comments,'form_comment':self.form_class_comment})
+    @method_decorator(login_required)
     def post(self,request,*args,**kwargs):
         form = self.form_class_comment(request.POST)
         if form.is_valid():
