@@ -34,25 +34,53 @@
             </div>
 
     <hr>
+    {% if request.user.is_authenticated %}
+        <form action="" method="post">
 
+            {% csrf_token %}
+            {{ form_comment.as_p }}
+            <input type="submit" value="Send Comment" class="btn btn-info">
+        </form>
+    {% else %}
+        <p class="alert alert-danger"> only logged in user can send comment</p>
+
+    {% endif %}
+
+
+
+    {{ comments.count }}
     {% for cm in comments %}
-        <div class="card bg-info text-white">
-            <p class="card-header">{{ cm.user }} - {{ cm.creaed|timesince }}</p>
+        <div class="card bg-dark text-white">
+            <p class="card-header">{{ cm.user }} - {{ cm.created|timesince }}</p>
             <p class="card-body">{{ cm.body }}</p>
-        </div>
-        {% empty %}
+            <hr>
+
+            {% if request.user.is_authenticated %}
+                <form action="{% url 'home:add_replay' product.id cm.id %}" method="post">
+                    {% csrf_token %}
+                    {{replay_form.as_p }}
+                    <input type="submit" value="Send Reply" class="btn btn-info">
+
+                </form>
+
+            {% endif %}
+
+
+
+            {% with replies=comments.replay_comments.all %}
+                {% for replay in replies %}
+                    <pv class="bg-danger p-3 m-2">{{ replay.user }} <br> {{ replay.body }}</pv>
+                {% endfor %}
+            {% endwith %}
+
+        </div><br>
+    {% empty %}
         <p class="lead text-white"> Comment yet! </p>
 
     {% endfor %}
 
-    {% if request.user.is_authenticated %}
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form_comment.as_p }}
-            <input type="submit" value="Send Comment" class="btn btn-info">
 
-        </form>
-    {% endif %}
+
 
                 </section>
 
