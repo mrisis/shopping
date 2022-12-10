@@ -8,7 +8,7 @@ from django.contrib import admin
 @admin.register(Product)
 class ProductAdmin(BaseAdmin):
     list_display = ('name','price','availabel','is_active','is_deleted')
-    row_id_fields=('category',)
+    raw_id_fields=('category',)
     prepopulated_fields = {'slug':('name',)}
 
 
@@ -26,7 +26,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class CommentAdmin(BaseAdmin):
     list_display = ['user' , 'product' , 'created' , 'is_deleted']
     raw_id_fields = ['user' , 'product' , 'replay']
-
 
 
 
