@@ -38,3 +38,27 @@ class OtpCode(models.Model):
     def __str__(self):
         return f'{self.phone_number} - {self.code} - {self.created}'
 
+#_______________________________________
+
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE , related_name='profile')
+    age = models.IntegerField(default=0)
+    address = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.user.email
+
+
+#_______________________________________
+
+
+
+
+
+
+
+
+
+
+
+

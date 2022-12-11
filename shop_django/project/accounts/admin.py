@@ -5,6 +5,7 @@ from . forms import UserchangeForm , UserCreationForm
 from . models import User , OtpCode
 
 
+
 class UserAdmin(BaseUserAdmin):
     form = UserchangeForm
     add_form = UserCreationForm
@@ -34,12 +35,15 @@ class UserAdmin(BaseUserAdmin):
 
 
 
+
+
+
 admin.site.register(User,UserAdmin)
+
 
 @admin.register(OtpCode)
 class OtpAdmin(admin.ModelAdmin):
     list_display = ['phone_number','code','created']
-
 
 
 

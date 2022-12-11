@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from django.views import View
-from . forms import RegisterationForm , VerifyCodeForm , UserLoginForm
+from . forms import RegisterationForm , VerifyCodeForm , UserLoginForm , EditProfileForm
 from django.contrib import messages
 from utils import send_sms_otp_code
 from . models import OtpCode , User
@@ -110,7 +110,19 @@ class UserPasswordResetCompleteView(auth_views.PasswordResetCompleteView):
     template_name = 'accounts/password_reset_complete.html'
 
 
+class ProfileEditView(LoginRequiredMixin,View):
+    form_class = EditProfileForm
+    def get(self,request):
+        form = self.form_class(instance=request.user)
+        return render(request , 'accounts/edit_profile.html',{'form':form})
 
+    def post(self,request):
+        form = self.form_class(request.POST , instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'your profile successfully updated' , 'success')
+            return redirect('accounts:user_profile' , request.user.id)
+        return render(request , 'accounts/edit_profile.html' , {'form':form})
 
 
 

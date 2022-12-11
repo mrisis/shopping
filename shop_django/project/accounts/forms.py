@@ -68,6 +68,20 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(label='',max_length=100,widget=forms.PasswordInput(attrs={'class':'form-control' , 'placeholder':'password'}))
 
 
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields=('email','phone_number' , 'full_name')
+        widgets = {
+            'email':forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}),
+            'phone_number':forms.TextInput(attrs={'class':'form-control','placeholder':'Phone Number'}),
+            'full_name':forms.TextInput(attrs={'class':'form-control','placeholder':'Full Name'}),
+
+
+
+
+        }
+
 
 
 
