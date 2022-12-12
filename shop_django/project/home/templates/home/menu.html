@@ -40,12 +40,13 @@
 
 
 
-    <div class="row">
-        {% for product in products %}
-            <div class="col-lg-4 col-md-6 gy-3 mb-2">
+    <div class="row ms-2  justify-content-center ms-0">
+        {% for product in productspage %}
+            <div class="col-4 d-flex justify-content-center">
                 <div class="card" style="width: 20rem;" >
                     <img class="img-fluid" src="{{ product.image.url }}" alt="photo product">
                     <div class="card-body" >
+                        <p>{{ product.name }}</p>
                         <a href="{{ product.get_absolute_url }}" class="btn btn-dark"> Detail & Buy</a>
                     </div>
                 </div>
@@ -59,6 +60,29 @@
 
 
     </div>
+
+    {% if productspage.has_previous %}
+       <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="?page={{ productspage.pervios_page_number }}">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+              </ul>
+        </nav>
+    {% endif %}
+    Page {{ productspage.number }} of {{ productspage.paginator.num_pages }}
+    {% if productspage.has_next %}
+        <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="?page={{ productspage.pervios_page_number }}">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ productspage.next_page_number }}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ productspage.paginator.num_pages }}">Last &raquo</a></li>
+              </ul>
+        </nav>
+
+
+    {% endif %}
+
 
 
 
