@@ -6,4 +6,4 @@ class CardAddForm(forms.Form):
 
 
 class CouponApplyForm(forms.Form):
-    code = forms.CharField()
+    code = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control w-25','placeholder':'Coupon code'}))
