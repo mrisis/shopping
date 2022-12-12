@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 class HomeView(View):
     def get(self,request):
 
@@ -20,13 +21,16 @@ class MenuView(View):
     def get(self,request,category_slug=None):
         form_search = ProductSearchForm
         products = Product.objects.filter(availabel=True)
+        p=Paginator(Product.objects.filter(availabel=True),2)
+        page = request.GET.get('page')
+        productspage = p.get_page(page)
         if request.GET.get('search'):
             products = products.filter(name__contains=request.GET['search'])
         categories = Category.objects.filter(is_sub=False)
         if category_slug:
             category=Category.objects.get(slug=category_slug)
             products = products.filter(category=category)
-        return render(request,'home/menu.html',{'products':products,'categories':categories ,'form_search':form_search})
+        return render(request,'home/menu.html',{'products':products,'categories':categories ,'form_search':form_search , 'productspage':productspage})
 
 
 class ProductDetailView(View):
