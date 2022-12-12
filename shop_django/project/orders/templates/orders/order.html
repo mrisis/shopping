@@ -6,16 +6,23 @@
 
 {% block body %}
 
-    <h3 class="text-light text-center" >Check Out</h3>
-    <p class="text-light text-center">Total :{{ order.get_total_price }}</p>
-    <a href="{% url 'order_pay' order.id %}" class="btn btn-outline-light" > Pay</a>
-    <form action="{% url 'orders:apply_coupon' order.id %}" method="post">
+
+    <div class="card text-center">
+  <div class="card-header">Check Out</div>
+  <div class="card-body">
+    <h5 class="card-title">Total : {{ order.get_total_price }}</h5>
+      <hr>
+    <form action="{% url 'orders:apply_coupon' order.id %}" method="post" class="text-center">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Apply">
+        <input type="submit" value="Apply" class="btn btn-outline-info">
 
     </form>
-
+      <hr>
+      <br>
+      <br>
+    <a href="{% url 'orders:order_pay' order.id %}" class="btn btn-outline-dark" > Pay</a>
+  </div>
 
 
 {% endblock %}
