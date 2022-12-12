@@ -61,8 +61,12 @@
 
     </div>
 
+
+
+    <!-- Pagination -->
+
     {% if productspage.has_previous %}
-       <nav aria-label="Page navigation example">
+       <nav aria-label="Page navigation example" class="fixed-bottom mb-5 d-flex justify-content-center">
               <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="?page={{ productspage.pervios_page_number }}">Previous</a></li>
                 <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
@@ -71,7 +75,7 @@
     {% endif %}
     Page {{ productspage.number }} of {{ productspage.paginator.num_pages }}
     {% if productspage.has_next %}
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example" class="fixed-bottom mb-5 d-flex justify-content-center">
               <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="?page={{ productspage.pervios_page_number }}">Previous</a></li>
                 <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
