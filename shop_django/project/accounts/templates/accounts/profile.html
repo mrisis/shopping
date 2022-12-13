@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
     Profile
 {% endblock %}
@@ -10,8 +11,11 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
+          {% if user.image %}
+            <img src="{{ user.image.url }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; object-fit: scale-down">
+          {% else %}
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; object-fit: scale-down">
+          {% endif %}
             <p class="text-muted mb-1">{{ user.full_name }}</p>
             <div class="d-flex justify-content-center mb-2">
             </div>
