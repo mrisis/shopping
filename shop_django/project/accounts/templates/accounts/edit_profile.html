@@ -12,7 +12,7 @@
                     <div class="card bg-light text-dark" style="border-radius: 1rem;">
                         <div class="card-body text-center">
 
-                            <form action="" method="post">
+                            <form action="" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="mb-md-4">
 
@@ -22,9 +22,7 @@
                                     <div class="form-outline form-white mb-3">
                                         {{ form.as_p }}
                                     </div>
-
-                                    <button class="btn btn-outline-dark btn-lg mt-2" type="submit" value="Edit Save"> Edit Save
-                                    </button>
+                                    <input type="submit" class="btn btn-outline-dark btn-lg mt-2" value="Save ">
                                 </div>
                             </form>
 
