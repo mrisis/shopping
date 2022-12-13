@@ -9,13 +9,12 @@
         <div class="input-group ms-3">
               <div class="form-outline">
                   <form action="" method="get">
-                      {% csrf_token %}
                       {{ form_search }}
+                      <input type="submit" value="Search" class="btn btn-info">
+                         <i class="fa-solid fa-magnifying-glass"></i>
+
                   </form>
               </div>
-              <button type="button" class="btn btn-primary py-0 px-2">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
 
         </div>
 
@@ -28,7 +27,7 @@
             </button>
             <ul class="dropdown-menu">
                 {% for sub in category.scategory.all %}
-                <li><a class="dropdown-item" href="{{ sub.get_absolute_url }}">{{ sub.name }}</a></li>
+                <li><a class="dropdown-item" href="{{ sub.get_absloute_url }}">{{ sub.name }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -38,12 +37,11 @@
 
 
 
-
-
+<div class="container">
     <div class="row ms-2  justify-content-center ms-0">
         {% for product in productspage %}
-            <div class="col-4 d-flex justify-content-center">
-                <div class="card" style="width: 20rem;" >
+            <div class="col-lg-4 col-md-6 col-sm-1  d-flex justify-content-center">
+                <div class="card mb-2" style="width: 20rem;"  >
                     <img class="img-fluid" src="{{ product.image.url }}" alt="photo product">
                     <div class="card-body" >
                         <p>{{ product.name }}</p>
@@ -53,9 +51,10 @@
             </div>
 
 
+
         {% endfor %}
     </div>
-
+</div>
 
 
 

@@ -18,7 +18,7 @@ class HomeView(View):
 
 
 class MenuView(View):
-    def get(self,request,category_slug=None):
+    def get(self,request,slug_cateory=None):
         form_search = ProductSearchForm
         products = Product.objects.filter(availabel=True)
         p=Paginator(Product.objects.filter(availabel=True),2)
@@ -26,10 +26,19 @@ class MenuView(View):
         productspage = p.get_page(page)
         if request.GET.get('search'):
             products = products.filter(name__contains=request.GET['search'])
+            p = Paginator(products, 2)
+            page = request.GET.get('page')
+            productspage = p.get_page(page)
+
+
         categories = Category.objects.filter(is_sub=False)
-        if category_slug:
-            category=Category.objects.get(slug=category_slug)
+        if slug_cateory:
+            category=Category.objects.get(slug=slug_cateory)
             products = products.filter(category=category)
+            p = Paginator(products, 2)
+            page = request.GET.get('page')
+            productspage = p.get_page(page)
+
         return render(request,'home/menu.html',{'products':products,'categories':categories ,'form_search':form_search , 'productspage':productspage})
 
 
