@@ -71,15 +71,12 @@ class UserLoginForm(forms.Form):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields=('email','phone_number' , 'full_name')
+        fields=('email','phone_number' , 'full_name','image')
         widgets = {
             'email':forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}),
             'phone_number':forms.TextInput(attrs={'class':'form-control','placeholder':'Phone Number'}),
             'full_name':forms.TextInput(attrs={'class':'form-control','placeholder':'Full Name'}),
-
-
-
-
+            'image':forms.FileInput(attrs={'class':'form-control','placeholder':'Image'}),
         }
 
 
