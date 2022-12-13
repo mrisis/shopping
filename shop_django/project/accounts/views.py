@@ -117,7 +117,7 @@ class ProfileEditView(LoginRequiredMixin,View):
         return render(request , 'accounts/edit_profile.html',{'form':form})
 
     def post(self,request):
-        form = self.form_class(request.POST , instance=request.user)
+        form = self.form_class(data=request.POST ,files=request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             messages.success(request,'your profile successfully updated' , 'success')
