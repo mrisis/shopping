@@ -43,12 +43,14 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'ckeditor',
     'crispy_forms',
+    'rest_framework',
 
     #local apps
     'orders.apps.OrdersConfig',
     'core.apps.CoreConfig',
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
+    'api.apps.ApiConfig',
 
 ]
 
