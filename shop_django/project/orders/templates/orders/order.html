@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
     Order Page
@@ -10,7 +11,7 @@
     <div class="card text-center">
   <div class="card-header">Check Out</div>
   <div class="card-body">
-    <h5 class="card-title">Total : {{ order.get_total_price }}</h5>
+    <h5 class="card-title">{% translate 'Total' %} : {{ order.get_total_price }}</h5>
       <hr>
     <form action="{% url 'orders:apply_coupon' order.id %}" method="post" class="text-center">
         {% csrf_token %}
