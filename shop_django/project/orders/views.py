@@ -1,4 +1,4 @@
-
+from django.http import HttpResponse
 from django.shortcuts import render , get_object_or_404 , redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -10,6 +10,8 @@ from . forms import CardAddForm , CouponApplyForm
 from . models import Order , OrderItem , Coupon
 import json
 import datetime
+import requests
+from django.utils.translation import gettext_lazy as _
 class CartView(View):
     def get(self,request):
         cart=Cart(request)
@@ -131,15 +133,15 @@ class CouponApplyView(LoginRequiredMixin,View):
             code = form.cleaned_data['code']
             try:
                 coupon = Coupon.objects.get(code__exact=code,valid_form__lte=now , valid_to__gte=now,active=True)
-            except CouponDoesNotExist:
+            except Coupon.DoesNotExist:
                 messages.error(request , 'Code is Wrong' , 'danger')
-                return redirect('orders:orders_detail' , order.id)
+                return redirect('orders:orders_detail' , order_id)
 
             order = Order.objects.get(id=order_id)
             order.discount = coupon.discount
             order.save()
 
-        return redirect('orders:orders_detail'  , order.id)
+        return redirect('orders:orders_detail', order.id)
 
 
 
