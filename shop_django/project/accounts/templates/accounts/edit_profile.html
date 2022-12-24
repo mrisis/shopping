@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
     Edit Profile
@@ -16,8 +17,8 @@
                                 {% csrf_token %}
                                 <div class="mb-md-4">
 
-                                    <h2 class="fw-bold text-uppercase">Edit Profile</h2>
-                                    <p class="text-dark-50 mb-4">Please change your data </p>
+                                    <h2 class="fw-bold text-uppercase">{% translate 'Edit Profile' %}</h2>
+                                    <p class="text-dark-50 mb-4">{% translate 'Please change your data' %} </p>
 
                                     <div class="form-outline form-white mb-3">
                                         {{ form.as_p }}
