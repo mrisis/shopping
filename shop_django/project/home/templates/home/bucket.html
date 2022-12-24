@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block title %}
     Bucket
 {% endblock %}
@@ -11,10 +12,10 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Size</th>
-          <th scope="col">Download</th>
-          <th scope="col">Delete</th>
+          <th scope="col">{% translate 'Name' %}</th>
+          <th scope="col">{% translate 'Size' %}</th>
+          <th scope="col">{% translate 'Download' %}</th>
+          <th scope="col">{% translate 'Delete' %}</th>
         </tr>
       </thead>
       <tbody>
@@ -23,8 +24,8 @@
               <th scope="row">{{ forloop.counter }}</th>
               <td >{{ obj.Key }}</td>
               <td>{{ obj.Size }}</td>
-              <td><a href="{% url 'home:download_obj_bucket' obj.Key %}">Download</a></td>
-              <td><a href="{% url 'home:delete_obj_bucket' obj.Key %}">Delete</a></td>
+              <td><a href="{% url 'home:download_obj_bucket' obj.Key %}">{% translate 'Dowload' %}</a></td>
+              <td><a href="{% url 'home:delete_obj_bucket' obj.Key %}">{% translate 'Delete' %}</a></td>
             </tr>
           {% endfor %}
 
