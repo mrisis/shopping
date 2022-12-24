@@ -9,6 +9,8 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
+from django.utils.translation import gettext_lazy as _
+
 
 class UserRegisterView(View):
     form_class = RegisterationForm
@@ -28,7 +30,7 @@ class UserRegisterView(View):
                 'full_name':form.cleaned_data['full_name'],
                 'password':form.cleaned_data['password']
             }
-            messages.success(request,'successfully send otp code','success')
+            messages.success(request,_('successfully send otp code'),'success')
             return redirect('accounts:verify_code')
         return render(request , 'accounts/register.html' , {'form':form})
 
@@ -54,16 +56,16 @@ class UserRegisterVerifyView(View):
                 messages.success(request , 'verify successfully ' , 'success')
                 return redirect('home:home')
             else:
-                messages.error(request,'this otp code is wrong' , 'danger')
+                messages.error(request,_('this otp code is wrong') , 'danger')
                 return redirect('accounts:verify_code')
-            return redirect('home:home')
+        return redirect('home:home')
 
 
 
 class UserLogout(LoginRequiredMixin,View):
     def get(self,request):
         logout(request)
-        messages.success(request,'you successfully logged out' , 'success')
+        messages.success(request,_('you successfully logged out') , 'success')
         return redirect('home:home')
 
 class UserLoginView(View):
@@ -80,9 +82,9 @@ class UserLoginView(View):
             user = authenticate(request,phone_number=cd['phone_number'] , password=cd['password'])
             if user is not None:
                 login(request,user)
-                messages.success(request,'you successfully logged in','success')
+                messages.success(request,_('you successfully logged in'),'success')
                 return redirect('home:home')
-            messages.error(request,'phone number or password is wrong' , 'danger')
+            messages.error(request,_('phone number or password is wrong') , 'danger')
         return render(request,self.template_name,{'form':form})
 
 
@@ -120,14 +122,18 @@ class ProfileEditView(LoginRequiredMixin,View):
         form = self.form_class(data=request.POST ,files=request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request,'your profile successfully updated' , 'success')
+            messages.success(request,_('your profile successfully updated') , 'success')
             return redirect('accounts:user_profile' , request.user.id)
         return render(request , 'accounts/edit_profile.html' , {'form':form})
 
 
 
 
-
+'''
+#!/bin/bash
+rm db.sqlite3
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete -not -path "*/venv/*"
+'''
 
 
 
