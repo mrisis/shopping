@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block title %}
     Cart Page
 {% endblock %}
@@ -10,11 +11,11 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Unit Price</th>
-          <th scope="col">Total Price</th>
-            <th scope="col">Remove</th>
+          <th scope="col">{% translate 'Name' %}</th>
+          <th scope="col">{% translate 'Quantity' %}</th>
+          <th scope="col">{% translate 'Unit Price' %}</th>
+          <th scope="col">{% translate 'Total Price' %}</th>
+            <th scope="col">{% translate 'Remove' %}</th>
         </tr>
       </thead>
       <tbody>
@@ -30,15 +31,15 @@
           {% endfor %}
 
           <tr>
-              <th scope="row">Total Price</th>
-              <td>Total Price</td>
+              <th scope="row">{% translate 'Total Price' %} </th>
+              <td>{% translate 'Total Price' %} </td>
               <td colspan="4"></td>
               <td>{{ cart.get_total_price }}</td>
           </tr>
       </tbody>
     </table>
     </div>
-    <a href="{% url 'orders:order_create' %}" class="btn btn-outline-light"> Check Out</a>
+    <a href="{% url 'orders:order_create' %}" class="btn btn-outline-light">{% translate 'Check Out' %}</a>
 
 
 
