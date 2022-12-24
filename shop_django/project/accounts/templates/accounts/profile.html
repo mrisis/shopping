@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}
     Profile
@@ -27,7 +28,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Full Name</p>
+                <p class="mb-0">{% translate 'Full Name' %}</p>
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{ user.full_name }}</p>
@@ -36,7 +37,7 @@
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Email</p>
+                <p class="mb-0">{% translate 'Email' %}</p>
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{ user.email }}</p>
@@ -45,14 +46,14 @@
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Phone</p>
+                <p class="mb-0">{% translate 'Phone' %} </p>
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{ user.phone_number }}</p>
               </div>
             </div>
             <hr>
-              <a href="{% url 'accounts:edit_profile' %}" class="btn btn-info">Edit Profile</a>
+              <a href="{% url 'accounts:edit_profile' %}" class="btn btn-info">{% translate 'Edit Profile' %} </a>
           </div>
         </div>
 
