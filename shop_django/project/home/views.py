@@ -11,17 +11,21 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-class HomeView(View):
-    def get(self,request):
+from django.utils.translation import activate,get_language
+from django.contrib.sessions.models import Session
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import TemplateView
 
-        return render(request,'home/home.html' ,)
+class HomeView(TemplateView):
+    template_name = 'home/home.html'
+
 
 
 class MenuView(View):
     def get(self,request,slug_cateory=None):
         form_search = ProductSearchForm
         products = Product.objects.filter(availabel=True)
-        p=Paginator(Product.objects.filter(availabel=True),2)
+        p=Paginator(Product.objects.filter(availabel=True),3)
         page = request.GET.get('page')
         productspage = p.get_page(page)
         if request.GET.get('search'):
@@ -62,7 +66,7 @@ class ProductDetailView(View):
             new_comment.user= request.user
             new_comment.product = self.product_instance
             new_comment.save()
-            messages.success(request,'your comment successfully sended.' , 'success')
+            messages.success(request,_('your comment successfully sended.') , 'success')
             return redirect('home:product_detail',self.product_instance.id , self.product_instance.slug)
 
 
@@ -76,13 +80,13 @@ class BucketHome(IsAdminUserMixin,View):
 class DeleteBucketObject(IsAdminUserMixin,View):
     def get(self,request,key):
         tasks.delete_object_task.delay(key)
-        messages.success(request,'bucket object successully deleted' , 'success')
+        messages.success(request,_('bucket object successully deleted') , 'success')
         return redirect('home:bucket')
 
 class DownloadBucketObject(IsAdminUserMixin,View):
     def get(self,request,key):
         tasks.download_object_task.delay(key)
-        messages.success(request,'bucket object successfully downloaded' , 'success')
+        messages.success(request,_('bucket object successfully downloaded') , 'success')
         return redirect('home:bucket')
 
 
@@ -99,17 +103,18 @@ class ProductAddReplayView(LoginRequiredMixin,View):
             replay.replay=comment
             replay.is_replay = True
             replay.save()
-            messages.success(request,'your replay successfully sended.')
+            messages.success(request,_('your replay successfully sended.'))
 
         return redirect('home:product_detail',product.id,product.slug)
 
 
 
+class ChangeLanguageView(View):
+    def get(self,request):
+        activate(request.GET.get('lang'))
 
-
-
-
-
+        print(get_language())
+        return redirect(request.GET.get('next'))
 
 
 
