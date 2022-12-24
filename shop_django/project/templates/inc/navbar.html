@@ -1,26 +1,31 @@
+{% load i18n %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <div class="navbar-nav">
 
-            <a class="navbar-brand" href="">Book Center <i class="fa-solid fa-book"></i>    </a>
+            <a class="navbar-brand" href="">{% translate 'Book Center' %} <i class="fa-solid fa-book"></i>    </a>
+
 
             {% if request.user.is_authenticated %}
 
-                <a class="nav-link active" href="{% url 'home:menu' %}">Menu <i class="fa-solid fa-bars"></i> </a>
-                <a class="nav-link active" href="{% url 'accounts:user_profile' request.user.id  %}"> Profile  <i class="fa-solid fa-user"></i> </a>
-                <a class="nav-link active" href="{% url 'orders:cart' %}">Cart {{ cart|length }} <i class="fa-solid fa-cart-shopping"></i> </a>
-                <a class="nav-link active" href="{% url 'accounts:user_logout' %}">Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i> </a>
+                <a class="nav-link active" href="{% url 'home:menu' %}">{% translate 'Menu' %} <i class="fa-solid fa-bars"></i> </a>
+                <a class="nav-link active" href="{% url 'accounts:user_profile' request.user.id  %}"> {% translate 'Profile' %}  <i class="fa-solid fa-user"></i> </a>
+                <a class="nav-link active" href="{% url 'orders:cart' %}">{% translate 'Cart' %} {{ cart|length }} <i class="fa-solid fa-cart-shopping"></i> </a>
+                <a class="nav-link active" href="{% url 'accounts:user_logout' %}">{% translate 'Log Out' %} <i class="fa-solid fa-arrow-right-from-bracket"></i> </a>
 
 
             {% else %}
-                <a class="nav-link active" href="{% url 'home:home' %}">Home  <i class="fa-solid fa-house"></i> </a>
-                <a class="nav-link active" href="{% url 'accounts:user_register' %}">Sign Up  <i class="fa-solid fa-user-plus"></i> </a>
-                <a class="nav-link active" href="{% url 'accounts:user_login' %}">Login <i class="fa-solid fa-arrow-right-to-bracket"></i> </a>
+                <a class="nav-link active" href="{% url 'home:home' %}">{% translate 'Home' %}  <i class="fa-solid fa-house"></i> </a>
+                <a class="nav-link active" href="{% url 'accounts:user_register' %}">{% translate 'Sing Up' %}  <i class="fa-solid fa-user-plus"></i> </a>
+                <a class="nav-link active" href="{% url 'accounts:user_login' %}">{% translate 'Log In' %} <i class="fa-solid fa-arrow-right-to-bracket"></i> </a>
             {% endif %}
             {% if request.user.is_admin %}
-                <a class="nav-link active" href="{% url 'home:bucket' %}">Bucket <i class="fa-solid fa-bucket"></i> </a>
+                <a class="nav-link active" href="{% url 'home:bucket' %}">{% translate 'Bucket' %} <i class="fa-solid fa-bucket"></i> </a>
             {% endif %}
+            <div class="nav-link active">
+                    <a href="{% url 'change_language' %}?lang=en&next=/en/{{ request.path|slice:'4:' }}" class="text-white">{% translate 'EN' %}</a> / <a href="{% url 'change_language' %}?lang=fa&next=/fa/{{ request.path|slice:'4:' }}" class="text-white">{% translate 'FA' %}</a>
+            </div>
 
         </div>
 
