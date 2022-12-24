@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
     Register Page
@@ -13,7 +14,7 @@
             <div class="row gx-lg-5 align-items-center">
                 <div class="col-lg-6 col-md-12" style="z-index: 10">
                     <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-                        Welcome to sign up page of Shop
+                        {% translate 'Welcome to sign up page of Shop' %}
                     </h1>
                 </div>
 
@@ -29,7 +30,7 @@
                                 {% csrf_token %}
 
                                 <div class="row">
-                                    <h2 class="fw-bold text-uppercase text-center mb-4">Sign up</h2>
+                                    <h2 class="fw-bold text-uppercase text-center mb-4">{% translate 'Sign up' %}</h2>
 
 
                                 </div>
@@ -45,7 +46,7 @@
                                 <!-- Submit button -->
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" value="signup" class="btn btn-outline-dark w-25">
-                                        Sign up
+                                        {% translate 'Sign up' %}
                                     </button>
                                 </div>
                             </form>
