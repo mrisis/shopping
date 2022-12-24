@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block title %}
     Login Page
 {% endblock %}
@@ -15,20 +16,20 @@
                                 {% csrf_token %}
                                 <div class="mb-md-4">
 
-                                    <h2 class="fw-bold text-uppercase">Login</h2>
-                                    <p class="text-dark-50 mb-4">Please enter your phone number and password!</p>
+                                    <h2 class="fw-bold text-uppercase">{% translate 'Login' %}</h2>
+                                    <p class="text-dark-50 mb-4">{% translate 'Please enter your phone number and password!' %} </p>
 
                                     <div class="form-outline form-white mb-3">
                                         {{ form.as_p }}
                                     </div>
                                     <div class="m-5">
-                                        <a href="{% url 'accounts:reset_password' %}">Forget Password? </a>
+                                        <a href="{% url 'accounts:reset_password' %}">{% translate 'Forget Password?' %} </a>
                                     </div>
 
 
 
 
-                                    <button class="btn btn-outline-dark btn-lg mt-2" type="submit" value="login">Login
+                                    <button class="btn btn-outline-dark btn-lg mt-2" type="submit" value="login">{% translate 'Login' %}
                                     </button>
                                 </div>
                             </form>
