@@ -17,11 +17,30 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
+from home import views
+from django.conf.urls.i18n import i18n_patterns
+
+
+admin.site.site_header = "Book Center Admin"
+admin.site.site_title = "Book Center Admin Portal"
+admin.site.index_title = "Welcome to Book Center Admin Portal"
+
 
 urlpatterns = [
+    path('change_language/' , views.ChangeLanguageView.as_view() , name='change_language'),
+    # path('admin/', admin.site.urls),
+    # path('' , include('home.urls' , namespace='home')),
+    # path('accounts/' , include('accounts.urls' , namespace='accounts')),
+    # path('orders/' , include('orders.urls' , namespace='orders')),
+    path('api/v1/' , include('api.urls' , namespace='api')),
+]
+
+urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('' , include('home.urls' , namespace='home')),
     path('accounts/' , include('accounts.urls' , namespace='accounts')),
     path('orders/' , include('orders.urls' , namespace='orders')),
-    path('api/v1/' , include('api.urls' , namespace='api')),
-] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+)
+
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
