@@ -11,6 +11,8 @@ from . models import Order , OrderItem , Coupon
 import json
 import datetime
 import requests
+
+
 from django.utils.translation import gettext_lazy as _
 class CartView(View):
     def get(self,request):
@@ -143,6 +145,23 @@ class CouponApplyView(LoginRequiredMixin,View):
 
         return redirect('orders:orders_detail', order.id)
 
+
+
+class OrderItemIncrease(LoginRequiredMixin,View):
+    def post(self,request):
+        cart = Cart(request)
+        product = get_object_or_404(Product , slug=request.POST.get('slug'))
+        cart.add(product=product)
+        return HttpResponse('ok')
+
+
+
+class OrderItemDecrease(LoginRequiredMixin,View):
+    def post(self,request):
+        cart = Cart(request)
+        product = get_object_or_404(Product , slug=request.POST.get('slug'))
+        cart.decrease(product=product)
+        return HttpResponse('ok')
 
 
 
