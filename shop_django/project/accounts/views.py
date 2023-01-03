@@ -89,7 +89,7 @@ class UserLoginView(View):
 
 
 class UserProfileView(LoginRequiredMixin,View):
-    def get(selfself,request,user_id):
+    def get(self,request,user_id):
         user = User.objects.get(id=user_id)
         return render(request,'accounts/profile.html',{'user':user})
 
