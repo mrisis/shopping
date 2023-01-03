@@ -1,0 +1,164 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.containers {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+.left-container {
+  background-color: black;
+  height: 100%;
+  width: 30%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.right-container {
+  position: relative;
+  background-color: white;
+  height: 100%;
+  width: 70vw;
+}
+
+.center-container {
+  position: absolute;
+  top: 25vh;
+  left: 15vw;
+  height: 50vh;
+  width: 40vw;
+  background-image: url("https://images.unsplash.com/photo-1551522355-dbf80597eba8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+  background-size: cover;
+  -webkit-box-shadow: 7px 29px 49px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 7px 29px 49px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 7px 29px 49px 0px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+  padding: 3rem;
+  font-size: 2rem;
+  font-family: "helvetica";
+}
+
+.info {
+  display: flex;
+  padding: 3rem;
+  font-size: 1rem;
+}
+
+.info a {
+  text-decoration: none;
+  margin-left: 1rem;
+  color: white;
+}
+
+.story {
+  position: absolute;
+  height: 40%;
+  left: 30vw;
+  top: 30vh;
+}
+
+.story h1 {
+  font-size: 9rem;
+  margin-bottom: 2rem;
+  font-family: "Garamond";
+}
+
+.story p {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+  padding-right: 20rem;
+  font-family: "Garamond";
+}
+
+.story p:nth-child(3) {
+  margin-top: 5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: "helvetica";
+}
+
+.menu-container {
+  position: absolute;
+  top: 3rem;
+  right: 4rem;
+  width: 50px;
+  height: 45px;
+}
+.menu,
+.menu:after,
+.menu:before {
+  width: 50px;
+  height: 5px;
+}
+
+.menu {
+  position: relative;
+  transform: translateY(20px);
+  background: black;
+}
+
+.menu:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+  background: black;
+}
+.menu:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15px;
+  background: black;
+}
+
+.social-container {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.social {
+  display: flex;
+}
+
+.social ul {
+  margin-right: 1rem;
+  font-weight: 700;
+  font-family: "helvetica";
+}
+
+.first-block {
+  position: absolute;
+  width: 0%;
+  height: 100vh;
+  background: black;
+  animation: go-left 4s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
+  left: 0;
+}
+
+@keyframes go-left {
+  0% {
+    left: 0;
+    width: 0%;
+  }
+  50% {
+    left: 0;
+    width: 100%;
+  }
+  100% {
+    left: 100%;
+    width: 0;
+  }
+}
