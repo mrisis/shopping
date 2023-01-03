@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from accounts.models import User
-from home.models import Product ,Category
+from home.models import Product ,Category , Comment
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,5 +30,36 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ('name' , 'image' , 'description' , 'price')
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField()
+    replies = serializers.SerializerMethodField()
+    class Meta:
+        model = Comment
+        fields = ( 'user','product' , 'body' , 'is_replay' , 'replay','replies')
+
+    def get_user(self,obj):
+        return obj.user.email
+
+    def get_replies(self,obj):
+        replies = obj.replay_comments.all()
+        return CommentReplySerializer(replies,many=True).data
+
+class CommentReplySerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Comment
+        fields = ('user','body')
+
+    def get_user(self,obj):
+        return obj.user.email
+
+
+
+
+
+
 
 # orders app serializers
