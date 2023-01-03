@@ -99,12 +99,4 @@ class CommentListApiView(APIView):
 
 
 
-
-
-
-
-
-
-
-
 # orders app api views
