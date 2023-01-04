@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from accounts.models import User
 from home.models import Product ,Category , Comment
+from orders.cart import Cart
+from rest_framework.response import Response
+from rest_framework import status
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -58,8 +61,29 @@ class CommentReplySerializer(serializers.ModelSerializer):
 
 
 
+class QuantitySerializer(serializers.Serializer):
+    quantity = serializers.IntegerField()
 
 
 
 
-# orders app serializers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
