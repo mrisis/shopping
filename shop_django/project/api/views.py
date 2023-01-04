@@ -2,11 +2,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ProfileSerializer , ProfileEditSerializer , ProductListSerializer ,\
-    CategoryListSerializer,ProductDetailSerializer , CommentSerializer , CommentReplySerializer
-from accounts.models import User
+    CategoryListSerializer,ProductDetailSerializer , CommentSerializer , CommentReplySerializer , QuantitySerializer
 from rest_framework import generics
 from home.models import Product , Category , Comment
 from bucket import bucket
+from orders.cart import Cart
+from accounts.models import User
 
 
 
@@ -97,6 +98,71 @@ class CommentListApiView(APIView):
         ser_data = CommentSerializer(comments , many = True)
         return Response(ser_data.data , status = status.HTTP_200_OK)
 
-
-
 # orders app api views
+
+class CartApiView(APIView):
+    def get(self,request):
+        cart = Cart(request)
+        return Response(cart.cart , status = status.HTTP_200_OK)
+
+
+class CartAddAPiView(APIView):
+    def post(self,request,product_id):
+        cart = Cart(request)
+        product = Product.objects.get(id=product_id)
+        ser_data = QuantitySerializer(data=request.data)
+        if ser_data.is_valid():
+            cart.add(product=product,quantity=ser_data.data['quantity'])
+            return Response(cart.cart , status = status.HTTP_200_OK)
+        return Response(ser_data.errors , status = status.HTTP_400_BAD_REQUEST)
+
+
+class CartRemoveApiView(APIView):
+    def delete(self,request,product_id):
+        cart = Cart(request)
+        product = Product.objects.get(id=product_id)
+        cart.remove(product)
+        return Response(cart.cart , status = status.HTTP_200_OK)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
