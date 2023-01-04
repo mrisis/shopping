@@ -1,9 +1,7 @@
 from rest_framework import serializers
 from accounts.models import User
 from home.models import Product ,Category , Comment
-from orders.cart import Cart
-from rest_framework.response import Response
-from rest_framework import status
+from orders.models import Order , OrderItem
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -64,6 +62,24 @@ class CommentReplySerializer(serializers.ModelSerializer):
 class QuantitySerializer(serializers.Serializer):
     quantity = serializers.IntegerField()
 
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+
+
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    order_items = serializers.SerializerMethodField()
+    class Meta:
+        model = Order
+        fields = ('order_items','user' , 'paid' , 'discount')
+
+    def get_order_items(self,obj):
+        order_items = obj.items.all()
+        return OrderItemSerializer(order_items,many=True).data
 
 
 
