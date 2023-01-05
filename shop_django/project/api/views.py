@@ -2,12 +2,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ProfileSerializer , ProfileEditSerializer , ProductListSerializer ,\
-    CategoryListSerializer,ProductDetailSerializer , CommentSerializer , CommentReplySerializer , QuantitySerializer
+    CategoryListSerializer,ProductDetailSerializer , CommentSerializer , CommentReplySerializer ,\
+    QuantitySerializer , OrderSerializer
 from rest_framework import generics
 from home.models import Product , Category , Comment
 from bucket import bucket
 from orders.cart import Cart
 from accounts.models import User
+from orders.models import Order , OrderItem
 
 
 
@@ -123,6 +125,25 @@ class CartRemoveApiView(APIView):
         product = Product.objects.get(id=product_id)
         cart.remove(product)
         return Response(cart.cart , status = status.HTTP_200_OK)
+
+
+
+class OrderCreateApiView(APIView):
+    def post(self,request):
+        order = Order.objects.create(user=request.user)
+        cart = Cart(request)
+        for item in cart:
+            OrderItem.objects.create(order=order,product=item['product'],price=item['price'],quantity=item['quantity'])
+        cart.clear()
+        ser_data = OrderSerializer(instance=order)
+        result = ser_data.data
+        result['message'] = 'order created'
+        return Response(result , status = status.HTTP_200_OK)
+
+
+
+
+
 
 
 
