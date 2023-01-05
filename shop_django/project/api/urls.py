@@ -18,5 +18,6 @@ urlpatterns = [
     path('cart/',views.CartApiView.as_view() , name='cart_api'),
     path('cart/add/<int:product_id>/',views.CartAddAPiView.as_view() , name='cart_add_api'),
     path('cart/remove/<int:product_id>/',views.CartRemoveApiView.as_view() , name='cart_remove_api'),
+    path('order/create/',views.OrderCreateApiView.as_view() , name='order_create_api'),
 
 ]
