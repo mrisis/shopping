@@ -53,11 +53,11 @@ class OrderCreateView(LoginRequiredMixin,View):
 
         for item in cart :
             OrderItem.objects.create(order=order, product=item['product'], price=item['price'] , quantity=item['quantity'])
+            cart.clear()
 
-        cart.clear()
         return redirect('orders:orders_detail',order.id)
 
-MERCHANT = '41b3a452-5a8c-4f34-86d8-84ba6e87413d'
+MERCHANT = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 ZP_API_REQUEST = "https://api.zarinpal.com/pg/v4/payment/request.json"
 ZP_API_VERIFY = "https://api.zarinpal.com/pg/v4/payment/verify.json"
 ZP_API_STARTPAY = "https://www.zarinpal.com/pg/StartPay/{authority}"
@@ -65,27 +65,20 @@ description = "در این صفحه دیگه باید پول را بدی داد�
 CallbackURL = 'http://127.0.0.1:8000/orders/verify/'
 
 
-
 class OrderPayView(LoginRequiredMixin,View):
     def get(self,request,order_id):
         order = Order.objects.get(id=order_id)
         request.session['order_pay'] = {'order_id':order.id,}
         req_data = {
-            'merchant_id':MERCHANT,
-            'amount':order.get_total_price(),
+            'merchant':MERCHANT,
+            'ammount':order.get_total_price(),
             'callback_url' : CallbackURL,
             'description': description,
-            'metadata': {'mobile':request.user.phone_number , 'email':request.user.email}
+            'metadata': {'mobile':request.user.phone_number , 'email':request.user.emil}
 
         }
-
-
-
-        req_header = {'accept':'application/json', 'content-type': 'application/json'}
+        req_header = {'accept':'application/json'}
         req = requests.post(url = ZP_API_REQUEST,data=json.dumps(req_data) , headers=req_header)
-
-        
-
         authority = req.json()['data']['authority']
         if len(req.json()['errors']) == 0:
             return redirect(ZP_API_STARTPAY.format(authority=authority))
@@ -150,7 +143,7 @@ class CouponApplyView(LoginRequiredMixin,View):
             order.discount = coupon.discount
             order.save()
 
-        return redirect('orders:orders_detail', order_id)
+        return redirect('orders:orders_detail', order.id)
 
 
 
