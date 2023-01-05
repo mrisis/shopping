@@ -79,14 +79,12 @@ class OrderPayView(LoginRequiredMixin,View):
 
         }
 
-        # print(req_data)
+
 
         req_header = {'accept':'application/json', 'content-type': 'application/json'}
         req = requests.post(url = ZP_API_REQUEST,data=json.dumps(req_data) , headers=req_header)
 
-        # print(req.json())
-        # print('______________')
-        print(req.json())
+        
 
         authority = req.json()['data']['authority']
         if len(req.json()['errors']) == 0:
