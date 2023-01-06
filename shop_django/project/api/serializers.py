@@ -83,6 +83,8 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 
+class CouponApplSerializer(serializers.Serializer):
+    code = serializers.CharField()
 
 
 
