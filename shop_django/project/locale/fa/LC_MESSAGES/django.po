@@ -1,0 +1,474 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-02 10:13+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: accounts/apps.py:8
+#, fuzzy
+#| msgid "discount"
+msgid "Accounts"
+msgstr "تخفیف"
+
+#: accounts/forms.py:8 accounts/forms.py:68
+msgid "password"
+msgstr "رمز عبور"
+
+#: accounts/forms.py:9
+msgid "confirm password"
+msgstr " تکرار رمز عبور"
+
+#: accounts/forms.py:18
+msgid "password dont match"
+msgstr "رمز عبور با تکرار آن مطابقت ندارد"
+
+#: accounts/forms.py:37 accounts/forms.py:76 accounts/forms.py:83
+#: accounts/templates/accounts/profile.html:40
+msgid "Email"
+msgstr "ایمیل"
+
+#: accounts/forms.py:38 accounts/forms.py:78 accounts/forms.py:85
+#: accounts/templates/accounts/profile.html:31
+msgid "Full Name"
+msgstr "نام و نام خانوادگی"
+
+#: accounts/forms.py:39 accounts/forms.py:77 accounts/forms.py:84
+msgid "Phone Number"
+msgstr "تلفن همراه"
+
+#: accounts/forms.py:40
+msgid "Password"
+msgstr "رمز عبور"
+
+#: accounts/forms.py:47
+msgid "this email already exist"
+msgstr "ایمیل وارد شده قبلا ثبت شده است"
+
+#: accounts/forms.py:54
+msgid "this phone number already exist"
+msgstr "این شماره تلفن قبلا ثبت شده است"
+
+#: accounts/forms.py:63 accounts/models.py:41 orders/models.py:50
+msgid "code"
+msgstr "کد"
+
+#: accounts/forms.py:67
+msgid "Phone Number OR Email"
+msgstr "تلفن همراه یا ایمیل"
+
+#: accounts/forms.py:79 accounts/forms.py:86 home/models.py:30
+msgid "Image"
+msgstr "عکس"
+
+#: accounts/models.py:7
+msgid "email"
+msgstr "ایمیل"
+
+#: accounts/models.py:8 accounts/models.py:40
+msgid "phone_number"
+msgstr "تلفن همراه"
+
+#: accounts/models.py:9
+msgid "full_name"
+msgstr "نام و نام خانوادگی"
+
+#: accounts/models.py:10
+msgid "image"
+msgstr "عکس"
+
+#: accounts/models.py:11
+msgid "is_active"
+msgstr "فعال"
+
+#: accounts/models.py:12
+msgid "is_admin"
+msgstr "ادمین"
+
+#: accounts/models.py:17 orders/models.py:10
+msgid "user"
+msgstr "کاربر"
+
+#: accounts/models.py:18
+msgid "users"
+msgstr "کاربران"
+
+#: accounts/models.py:42
+msgid "created"
+msgstr "ساخته شده"
+
+#: accounts/models.py:45
+msgid "OtpCode"
+msgstr "کد احراز هویت"
+
+#: accounts/models.py:46
+msgid "OtpCodes"
+msgstr "کدهای احراز هویت"
+
+#: accounts/templates/accounts/edit_profile.html:20
+#: accounts/templates/accounts/profile.html:56
+msgid "Edit Profile"
+msgstr "ویرایش پروفایل"
+
+#: accounts/templates/accounts/edit_profile.html:21
+msgid "Please change your data"
+msgstr "لطفا اطلاعات خود را تغییر دهید"
+
+#: accounts/templates/accounts/login.html:19
+#: accounts/templates/accounts/login.html:32
+msgid "Login"
+msgstr "وارد شوید"
+
+#: accounts/templates/accounts/login.html:20
+msgid "Please enter your phone number and password!"
+msgstr "لطفا شماره تلفن همراه و رمز عبور خود را وارد کنید"
+
+#: accounts/templates/accounts/login.html:26
+msgid "Forget Password?"
+msgstr "فراموشی رمز عبور؟"
+
+#: accounts/templates/accounts/password_reset_complete.html:9
+msgid "Your password changed successfully."
+msgstr "رمز عبور شما با موفقیت تغییر کرد"
+
+#: accounts/templates/accounts/password_reset_confirm.html:20
+#: accounts/templates/accounts/password_reset_form.html:19
+msgid "Reset Password"
+msgstr "تغییر رمز عبور"
+
+#: accounts/templates/accounts/password_reset_confirm.html:21
+msgid "Please enter Your New Password"
+msgstr "لطفا رمز عبور جدید خود را وارد کنید"
+
+#: accounts/templates/accounts/password_reset_confirm.html:46
+msgid "This link is not valid . Please try again"
+msgstr "این لینک معتبر نیست. لطفا دوباره تلاش کنید"
+
+#: accounts/templates/accounts/password_reset_done.html:10
+msgid "We Sent You an Email"
+msgstr "ما به شما یک ایمیل ارسال کردیم"
+
+#: accounts/templates/accounts/password_reset_form.html:20
+msgid "Please enter Email for send link Reset Password"
+msgstr "لطفا ایمیل خود را وارد کنید تا لینک تغییر رمز عبور ارسال شود"
+
+#: accounts/templates/accounts/profile.html:49
+msgid "Phone"
+msgstr "تلفن همراه"
+
+#: accounts/templates/accounts/register.html:17
+msgid "Welcome to sign up page of Shop"
+msgstr "خوش آمدید به صفحه ثبت نام فروشگاه"
+
+#: accounts/templates/accounts/register.html:33
+#: accounts/templates/accounts/register.html:49
+msgid "Sign up"
+msgstr "ثبت نام"
+
+#: accounts/templates/accounts/verify.html:16
+msgid "Verify Otp Code for Sign Up"
+msgstr "تایید کد احراز هویت برای ثبت نام"
+
+#: accounts/templates/accounts/verify.html:32
+#: accounts/templates/accounts/verify.html:48
+msgid "Verify"
+msgstr "تایید"
+
+#: accounts/views.py:33
+msgid "successfully send otp code"
+msgstr "ارسال کد احراز هویت با موفقیت انجام شد"
+
+#: accounts/views.py:59
+msgid "this otp code is wrong"
+msgstr "کد احراز هویت اشتباه است"
+
+#: accounts/views.py:68
+msgid "you successfully logged out"
+msgstr "شما با موفقیت خارج شدید"
+
+#: accounts/views.py:85
+msgid "you successfully logged in"
+msgstr "شما با موفقیت وارد شدید"
+
+#: accounts/views.py:87
+msgid "phone number or password is wrong"
+msgstr "تلفن همراه یا رمز عبور اشتباه است"
+
+#: accounts/views.py:125
+msgid "your profile successfully updated"
+msgstr "مشخصات شما با موفقیت به روز شد"
+
+#: home/apps.py:9 templates/inc/navbar.html:19
+msgid "Home"
+msgstr "خانه"
+
+#: home/forms.py:15
+msgid "body"
+msgstr "متن"
+
+#: home/forms.py:24
+msgid "please enter your replay comment"
+msgstr "لطفا پاسخ خود را وارد کنید"
+
+#: home/forms.py:29
+msgid "Search"
+msgstr "جستجو"
+
+#: home/models.py:8
+msgid "Sub Category"
+msgstr "زیر دسته بندی"
+
+#: home/models.py:9
+msgid "Is Sub Category"
+msgstr "زیر دسته بندی است؟"
+
+#: home/models.py:10 home/models.py:28 home/templates/home/bucket.html:15
+#: orders/templates/orders/cart.html:14
+msgid "Name"
+msgstr "نام"
+
+#: home/models.py:11 home/models.py:29
+msgid "Slug"
+msgstr "عنوان"
+
+#: home/models.py:15 home/models.py:27
+msgid "Category"
+msgstr "دسته بندی"
+
+#: home/models.py:16
+msgid "categories"
+msgstr "دسته بندی ها"
+
+#: home/models.py:31
+msgid "Description"
+msgstr "توضیحات"
+
+#: home/models.py:32
+msgid "Price"
+msgstr "قیمت"
+
+#: home/models.py:33
+msgid "Availabel"
+msgstr "در دسترس"
+
+#: home/models.py:39 home/models.py:52
+msgid "Product"
+msgstr "محصول"
+
+#: home/models.py:40
+msgid "Products"
+msgstr "محصولات"
+
+#: home/models.py:51
+msgid "User"
+msgstr "کاربر"
+
+#: home/models.py:53
+msgid "Body"
+msgstr "متن"
+
+#: home/models.py:54
+msgid "Replay"
+msgstr "پاسخ"
+
+#: home/models.py:55
+msgid "Is Replay"
+msgstr "پاسخ است؟"
+
+#: home/models.py:58
+msgid "Comment"
+msgstr "نظر"
+
+#: home/models.py:59
+msgid "Comments"
+msgstr "نظرات"
+
+#: home/templates/home/bucket.html:16
+msgid "Size"
+msgstr "سایز"
+
+#: home/templates/home/bucket.html:17
+msgid "Download"
+msgstr "دانلود"
+
+#: home/templates/home/bucket.html:18 home/templates/home/bucket.html:28
+msgid "Delete"
+msgstr "حذف"
+
+#: home/templates/home/bucket.html:27
+msgid "Dowload"
+msgstr "دانلود"
+
+#: home/templates/home/detail.html:47
+msgid "only logged in user can send comment"
+msgstr "فقط کاربران وارد شده میتوانند نظر بدهند"
+
+#: home/templates/home/detail.html:80
+msgid "Comment yet!"
+msgstr "هیچ نظری ثبت نشده است"
+
+#: home/views.py:69
+msgid "your comment successfully sended."
+msgstr "نظر شما با موفقیت ثبت شد"
+
+#: home/views.py:83
+msgid "bucket object successully deleted"
+msgstr "آیتم مورد نظر با موفقیت حذف شد"
+
+#: home/views.py:89
+msgid "bucket object successfully downloaded"
+msgstr "آیتم مورد نظر با موفقیت دانلود شد"
+
+#: home/views.py:106
+msgid "your replay successfully sended."
+msgstr "پاسخ شما با موفقیت ثبت شد"
+
+#: orders/apps.py:9 orders/models.py:18
+msgid "Orders"
+msgstr "سفارشات"
+
+#: orders/forms.py:6 orders/templates/orders/cart.html:15
+msgid "Quantity"
+msgstr "تعداد"
+
+#: orders/forms.py:10
+msgid "Coupon code"
+msgstr "کد تخفیف"
+
+#: orders/models.py:11
+msgid "paid"
+msgstr "وضعیت پرداخت"
+
+#: orders/models.py:12 orders/models.py:53
+msgid "discount"
+msgstr "تخفیف"
+
+#: orders/models.py:17
+msgid "Order"
+msgstr "سفارش"
+
+#: orders/models.py:32
+msgid "order"
+msgstr "سفارش"
+
+#: orders/models.py:33
+msgid "product"
+msgstr "محصول"
+
+#: orders/models.py:34
+msgid "price"
+msgstr "قیمت"
+
+#: orders/models.py:35
+msgid "quantity"
+msgstr "تعداد"
+
+#: orders/models.py:38
+msgid "OrderItem"
+msgstr "آیتم سفارش"
+
+#: orders/models.py:39
+msgid "OrderItems"
+msgstr "آیتم های سفارش"
+
+#: orders/models.py:51
+msgid "valid_form"
+msgstr "معتبر از"
+
+#: orders/models.py:52
+msgid "valid_to"
+msgstr "معتبر تا"
+
+#: orders/models.py:54
+msgid "active"
+msgstr "فعال"
+
+#: orders/models.py:57
+msgid "Coupon"
+msgstr "کوپن"
+
+#: orders/models.py:58
+msgid "Coupons"
+msgstr "کوپن ها"
+
+#: orders/templates/orders/cart.html:16
+msgid "Unit Price"
+msgstr "قیمت واحد"
+
+#: orders/templates/orders/cart.html:17 orders/templates/orders/cart.html:34
+#: orders/templates/orders/cart.html:35
+msgid "Total Price"
+msgstr "قیمت کل"
+
+#: orders/templates/orders/cart.html:18
+msgid "Remove"
+msgstr "حذف"
+
+#: orders/templates/orders/cart.html:42
+msgid "Check Out"
+msgstr "پرداخت"
+
+#: orders/templates/orders/order.html:14
+msgid "Total"
+msgstr "جمع کل"
+
+#: templates/inc/footer.html:3
+msgid "Copyright"
+msgstr "کپی رایت"
+
+#: templates/inc/footer.html:3
+msgid "Your Website"
+msgstr "وب سایت شما"
+
+#: templates/inc/navbar.html:7
+msgid "Book Center"
+msgstr "مرکز کتاب"
+
+#: templates/inc/navbar.html:12
+msgid "Menu"
+msgstr "منو"
+
+#: templates/inc/navbar.html:13
+msgid "Profile"
+msgstr "پروفایل"
+
+#: templates/inc/navbar.html:14
+msgid "Cart"
+msgstr "سبد خرید"
+
+#: templates/inc/navbar.html:15
+msgid "Log Out"
+msgstr "خارج شدن"
+
+#: templates/inc/navbar.html:20
+msgid "Sing Up"
+msgstr "ثبت نام"
+
+#: templates/inc/navbar.html:21
+msgid "Log In"
+msgstr "وارد شدن"
+
+#: templates/inc/navbar.html:24
+msgid "Bucket"
+msgstr "صندوقچه"
+
+#: templates/inc/navbar.html:27
+msgid "EN"
+msgstr "انگلیسی"
+
+#: templates/inc/navbar.html:27
+msgid "FA"
+msgstr "فارسی"

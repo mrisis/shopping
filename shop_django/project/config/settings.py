@@ -240,9 +240,10 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '10/day',
-        'user': '100/day'
-    }
+        'anon': '10/hr',
+        'user': '5/hr'
+    },
+    'PAGE_SIZE': 1,
 
 }
 
