@@ -17,6 +17,10 @@ from django.utils.translation import gettext_lazy as _
 class CartView(View):
     def get(self,request):
         cart=Cart(request)
+        list_items =[item for item in cart]
+        for item in list_items:
+            if not item['product'].availabel:
+                cart.remove(item['product'])
         return render(request,'orders/cart.html',{'cart':cart})
 
 
@@ -49,11 +53,12 @@ class OrderDetailView(LoginRequiredMixin,View):
 class OrderCreateView(LoginRequiredMixin,View):
     def get(self,request):
         cart = Cart(request)
+
         order = Order.objects.create(user=request.user)
 
-        for item in cart :
-            OrderItem.objects.create(order=order, product=item['product'], price=item['price'] , quantity=item['quantity'])
-            cart.clear()
+        order_items = [OrderItem(order=order, product=item['product'], price=item['price'] , quantity=item['quantity']) for item in cart]
+        OrderItem.objects.bulk_create(order_items)
+        cart.clear()
 
         return redirect('orders:orders_detail',order.id)
 
