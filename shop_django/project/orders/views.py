@@ -21,6 +21,7 @@ class CartView(View):
         for item in list_items:
             if not item['product'].availabel:
                 cart.remove(item['product'])
+                messages.warning(request,_('product is not availabel and removed from cart'))
         return render(request,'orders/cart.html',{'cart':cart})
 
 
