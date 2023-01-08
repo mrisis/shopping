@@ -58,17 +58,28 @@ class OrderCreateApiView(APIView):
         method post:
             for create order and save order in database
     '''
-    def post(self,request):
+    # def post(self,request):
+    #     order = Order.objects.create(user=request.user)
+    #     cart = Cart(request)
+    #     for item in cart:
+    #         OrderItem.objects.create(order=order,product=item['product'],price=item['price'],quantity=item['quantity'])
+    #     cart.clear()
+    #     ser_data = OrderSerializer(instance=order)
+    #     result = ser_data.data
+    #     result['message'] = 'order created'
+    #     return Response(result , status = status.HTTP_200_OK)
+
+    def post(self, request):
         order = Order.objects.create(user=request.user)
         cart = Cart(request)
-        for item in cart:
-            OrderItem.objects.create(order=order,product=item['product'],price=item['price'],quantity=item['quantity'])
+        order_items = [OrderItem(order=order, product=item['product'], price=item['price'], quantity=item['quantity']) for item in cart]
+
+        OrderItem.objects.bulk_create(order_items)
         cart.clear()
         ser_data = OrderSerializer(instance=order)
         result = ser_data.data
         result['message'] = 'order created'
-        return Response(result , status = status.HTTP_200_OK)
-
+        return Response(result, status=status.HTTP_200_OK)
 
 
 class OrderDetailApiView(APIView):
