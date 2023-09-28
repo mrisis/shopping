@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Menu
+{% endblock %}
+
+{% block body %}
+
+        <div class="ms-3">
+              <div class="form-outline">
+                  <form action="" method="get" class="input-group ">
+                      {{ form_search }}
+                      <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+
+                  </form>
+              </div>
+
+        </div>
+
+    {% for category in categories %}
+
+        <div class="btn-group">
+            <a href="{{ category.get_absolute_url }}" class="btn btn-dark">{{ category.name }}</a>
+            <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                {% for sub in category.scategory.all %}
+                <li><a class="dropdown-item" href="{{ sub.get_absloute_url }}">{{ sub.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    {% endfor %}
+    <br/><br/>
+
+
+
+<div class="container">
+    <div class="row ms-2  justify-content-center ms-0">
+        {% for product in productspage %}
+            <div class="col-lg-4 col-md-6 col-sm-1  d-flex justify-content-center">
+                <div class="card mb-2" style="width: 20rem;"  >
+                    <img class="img-fluid" src="{{ product.image.url }}" alt="photo product" style="width: 300px; height: 450px;  object-fit: scale-down;">
+                    <div class="card-body" >
+                        <p>{{ product.name }}</p>
+                        <a href="{{ product.get_absolute_url }}" class="btn btn-dark"> Detail & Buy</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        {% endfor %}
+    </div>
+</div>
+
+
+
+    </div>
+
+
+
+    <!-- Pagination -->
+
+    {% if productspage.has_previous %}
+       <nav aria-label="Page navigation example" class="fixed-bottom mb-5 d-flex justify-content-center">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="?page={{ productspage.previous_page_number }}">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+              </ul>
+        </nav>
+    {% endif %}
+    <p class="text-light fixed-bottom mb-5">Page {{ productspage.number }} of {{ productspage.paginator.num_pages }}</p>
+    {% if productspage.has_next %}
+        <nav aria-label="Page navigation example" class="fixed-bottom mb-5 d-flex justify-content-center">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="?page={{ productspage.pervios_page_number }}">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ productspage.next_page_number }}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ productspage.paginator.num_pages }}">Last &raquo</a></li>
+              </ul>
+        </nav>
+
+
+    {% endif %}
+
+
+
+
+
+{% endblock %}
+

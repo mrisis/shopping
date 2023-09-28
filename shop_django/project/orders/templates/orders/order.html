@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    Order Page
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="card text-center">
+  <div class="card-header">Check Out</div>
+  <div class="card-body">
+    <h5 class="card-title">{% translate 'Total' %} : {{ order.get_total_price }}</h5>
+      <hr>
+    <form action="{% url 'orders:apply_coupon' order.id %}" method="post" class="text-center">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Apply" class="btn btn-outline-info">
+
+    </form>
+      <hr>
+      <br>
+      <br>
+    <a href="{% url 'orders:order_pay' order.id %}" class="btn btn-outline-dark" > Pay</a>
+  </div>
+
+
+{% endblock %}
+
+

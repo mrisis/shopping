@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+
+{% block head %}
+
+
+    {% if LANGUAGE_CODE == 'fa' %}
+        <link rel="stylesheet" href="{% static '/css/rtl.css' %}" type="text/css">
+
+    {% endif %}
+
+
+
+    <link rel="stylesheet" href="{% static '/css/homestyle.css' %}" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+
+
+
+
+{% endblock %}
+
+{% block body %}
+    <div class="containers">
+      <div class="left-container">
+        <div class="logo">Book Center</div>
+
+      </div>
+
+      <div class="right-container">
+        <div class="first-block"></div>
+        <div class="menu-container">
+          <div class="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="story">
+          <h2>Book Center</h2>
+          <br>
+          <br>
+          <p class="font-weight-bold">
+            This is the book center store.
+             and it is for all book lovers.
+              and any book you want is available here.
+              It is a long established fact that a reader will be distracted by the readable
+              content of a page when looking at its layout. The point of using Lorem Ipsum is
+               that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,
+                content here', making it look like readable English. Many desktop publishing packages and web page editors now
+                use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+                 Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+          </p>
+          <br>
+          <br>
+          <br>
+
+
+            <p>
+
+              <button class="btn btn-outline-light glow-on-hover text-white"><a href="#" class="text-light" >Continues</a></button>
+          </p>
+
+
+        </div>
+
+
+      </div>
+      <div class="center-container"></div>
+    </div>
+    <script type="text/javascript">
+      TweenMax.from(".left-container", 2, {
+        width: "0",
+        ease: Expo.easeInOut
+      });
+      TweenMax.from(".right-container", 2, {
+        delay: 1.5,
+        width: "0",
+        opacity: "0",
+        ease: Expo.easeInOut
+      });
+      TweenMax.from(".center-container", 2, {
+        delay: 3,
+        width: "0",
+        x: -20,
+        ease: Expo.easeInOut
+      });
+      TweenMax.from(".logo", 2, {
+        delay: 1.5,
+        y: 20,
+        opacity: 0,
+        ease: Expo.easeInOut
+      });
+      TweenMax.from(".info", 2, {
+        delay: 1.5,
+        y: 50,
+        opacity: 0,
+        scale: 2.5,
+        ease: Expo.easeInOut
+      });
+      TweenMax.from(".story", 2, {
+        delay: 2.5,
+        y: 20,
+        opacity: 0,
+        ease: Expo.easeInOut
+      });
+      TweenMax.from(".menu", 2, {
+        delay: 3.5,
+        y: 20,
+        opacity: 0,
+        rotation: 90,
+        ease: Expo.easeInOut
+      });
+      TweenMax.staggerFrom(
+        ".social ul",
+        2,
+        {
+          delay: 3.8,
+          opacity: 0,
+          y: 20,
+          ease: Expo.easeInOut
+        },
+        0.1
+      );
+    </script>
+
+
+
+
+
+
+{% endblock %}

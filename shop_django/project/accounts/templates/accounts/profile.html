@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block body %}
+    <section class="bg-dark">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+          {% if user.image %}
+            <img src="{{ user.image.url }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; object-fit: scale-down">
+          {% else %}
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; object-fit: scale-down">
+          {% endif %}
+            <p class="text-muted mb-1">{{ user.full_name }}</p>
+            <div class="d-flex justify-content-center mb-2">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4 mt-1">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{% translate 'Full Name' %}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.full_name }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{% translate 'Email' %}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.email }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{% translate 'Phone' %} </p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ user.phone_number }}</p>
+              </div>
+            </div>
+            <hr>
+              <a href="{% url 'accounts:edit_profile' %}" class="btn btn-info">{% translate 'Edit Profile' %} </a>
+          </div>
+        </div>
+
+  </div>
+</div>
+</div>
+</section>
+
+
+
+{% endblock %}

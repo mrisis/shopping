@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+    Detail Produvct
+{% endblock %}
+
+
+{% block body %}
+
+
+        <section class="py-5 text-light">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0 border-light rounded-5" src="{{ product.image.url }}" alt="..." /></div>
+                    <div class="col-md-6">
+
+                        <h1 class="display-5 fw-bolder">{{ product.name }}</h1>
+                        <div class="fs-5 mb-5">
+                            <span class="lead">{{ product.price }}$</span>
+
+                        </div>
+
+                        <p class="lead">{{ product.description }}</p>
+                        <div class="d-flex">
+                            <form action="{% url 'orders:cart_add' product.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    {{ form.as_p }}
+                                    <input type="submit" class="btn btn-outline-light flex-shrink-0" value="Add To Card">
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <hr>
+    {% if request.user.is_authenticated %}
+        <form action="" method="post">
+
+            {% csrf_token %}
+            {{ form_comment.as_p }}
+            <input type="submit" value="Send Comment" class="btn btn-info">
+        </form>
+    {% else %}
+        <p class="alert alert-danger">{% translate 'only logged in user can send comment'%} </p>
+
+    {% endif %}
+
+
+
+    {{ comments.count }}
+    {% for cm in comments %}
+        <div class="card bg-dark text-white">
+            <p class="card-header">{{ cm.user }} - {{ cm.created|timesince }}</p>
+            <p class="card-body">{{ cm.body }}</p>
+            <hr>
+
+            {% if request.user.is_authenticated %}
+                <form action="{% url 'home:add_replay' product.id cm.id %}" method="post">
+                    {% csrf_token %}
+                    {{replay_form.as_p }}
+                    <input type="submit" value="Send Reply" class="btn btn-info">
+
+                </form>
+
+            {% endif %}
+
+
+
+            {% with replies=comments.replay_comments.all %}
+                {% for replay in replies %}
+                    <pv class="bg-danger p-3 m-2">{{ replay.user }} <br> {{ replay.body }}</pv>
+                {% endfor %}
+            {% endwith %}
+
+        </div><br>
+    {% empty %}
+        <p class="lead text-white">{% translate 'Comment yet!' %} </p>
+
+    {% endfor %}
+
+
+
+
+                </section>
+
+
+
+
+
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

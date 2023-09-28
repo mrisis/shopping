@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+    Cart Page
+{% endblock %}
+
+{% block body %}
+
+    <div >
+     <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{% translate 'Name' %}</th>
+          <th scope="col">{% translate 'Quantity' %}</th>
+          <th scope="col">{% translate 'Unit Price' %}</th>
+          <th scope="col">{% translate 'Total Price' %}</th>
+            <th scope="col">{% translate 'Remove' %}</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for item in cart %}
+            <tr>
+              <th class="align-middle" scope="row">{{ forloop.counter }}</th>
+              <td class="align-middle" >{{ item.product }}</td>
+
+              <td class="d-flex align-middle" >
+                  <button  class="btn btn-outline-light add_item me-3 " type="button" onclick="add('{{ item.product.slug }}')">+</button>
+                  <div id="{{ item.product.slug }}" class="mt-1">
+                      {{ item.quantity }}
+                  </div>
+
+                  <button  class="btn btn-outline-light add_item ms-3" type="button" onclick="minus('{{ item.product.slug }}')">-</button>
+
+
+              </td>
+              <td class="align-middle">{{ item.price }}</td>
+              <td class="align-middle">{{ item.total_price }}</td>
+            <td><a href="{% url 'orders:cart_remove' item.product.id %}"> Remove </a></td>
+            </tr>
+          {% endfor %}
+
+          <tr>
+              <th scope="row">{% translate 'Total Price' %} </th>
+              <td class="align-middle">{% translate 'Total Price' %}  </td>
+              <td class="align-middle" colspan="4"></td>
+              <td class="align-middle">{{ cart.get_total_price }}</td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+    <a href="{% url 'orders:order_create' %}" class="btn btn-outline-light">{% translate 'Check Out' %}</a>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+
+        $(document).ajaxSend(function (event, jqxhr, settings) {
+        jqxhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+        });
+
+
+
+        function add(slug){
+
+            var quantity = document.getElementById(slug).innerHTML;
+
+
+            quantity = parseInt(quantity) + 1;
+            document.getElementById(slug).innerHTML = quantity;
+
+
+
+            $.ajax({
+                url: "{% url 'orders:cart_addquantity' %}",
+                type: "POST",
+                data: {
+                    'slug': slug,
+
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    console.log(response);
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Added to cart',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        }
+
+
+        function minus(slug){
+
+            var quantity = document.getElementById(slug).innerHTML;
+            quantity = parseInt(quantity) - 1;
+            if (quantity < 1){
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Quantity can not be less than 1!',
+                })
+            }
+            else{
+                document.getElementById(slug).innerHTML = quantity;
+            }
+
+            $.ajax({
+                url: "{% url 'orders:cart_minus' %}",
+                type: "POST",
+                data: {
+                    'slug': slug,
+
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    console.log(response);
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'warning',
+                        title: 'Removed from cart',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+
+        }
+
+
+
+
+    </script>
+
+{% endblock %}

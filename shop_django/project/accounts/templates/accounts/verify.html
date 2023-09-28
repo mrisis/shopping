@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    Verfiy Page
+{% endblock %}
+{% block body %}
+      <style></style>
+    <section class="bg-dark overflow-hidden mt-5 p-5">
+
+
+        <div class="container px-4 px-md-5 text-center bg-dark">
+            <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6 col-md-12" style="z-index: 10">
+                    <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                        {% translate 'Verify Otp Code for Sign Up' %}
+                    </h1>
+                </div>
+
+                <div class="col-lg-6 col-md-12 mb-lg-0 position-relative mt-5">
+
+                    <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                    <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+                    <div class="card bg-glass">
+                        <div class="card-body px-4 px-md-5">
+
+                            <form action="" method="post">
+                                {% csrf_token %}
+
+                                <div class="row">
+                                    <h2 class="fw-bold text-uppercase text-center mb-4">{% translate 'Verify' %} </h2>
+
+
+                                </div>
+
+
+                                <div class="form-outline mb-4">
+
+                                    {{ form.as_p}}
+                                </div>
+
+
+
+                                <!-- Submit button -->
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" value="Verify" class="btn btn-outline-dark w-25">
+                                        {% translate 'Verify' %}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

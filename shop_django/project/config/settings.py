@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,17 +32,40 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "admin_interface",
+    "colorfield",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third party apps
+    'storages',
+    'django_celery_beat',
+    'ckeditor',
+    'crispy_forms',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    'drf_yasg',
+
+    #local apps
+    'orders.apps.OrdersConfig',
+    'core.apps.CoreConfig',
+    'home.apps.HomeConfig',
+    'accounts.apps.AccountsConfig',
+    'api.apps.ApiConfig',
+
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -54,7 +78,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'orders.context_processors.cart',
             ],
         },
     },
@@ -77,9 +102,28 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+
+        # for use postgresql
+            # 'default': {
+            #         'ENGINE': 'django.db.backends.postgresql',
+            #         'NAME': 'rezaamin',
+            #         'USER': 'postgres',
+            #         'PASSWORD': 'postgres',
+            #         'HOST': '127.0.0.1',
+            #         'PORT': '5432',
+            #     }
     }
 }
 
+#config chace redis
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+#         'LOCATION': 'redis://127.0.0.1:6379',
+#     }
+# }
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -105,7 +149,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -116,8 +160,105 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS= [
+    BASE_DIR/'static'
+]
+
+#Authenticate Backend
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.authenticate.EmailAuthBackend',
+]
+
+
+#media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT= BASE_DIR/'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL= 'accounts.User'
+
+#Arvan Cloud Storages Config
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = '76acabe6-2931-4a04-845f-69b90f1e75e1'
+AWS_SECRET_ACCESS_KEY = 'e659dc6649b69a05ce49bf72fb8a9a7341c7d9b8'
+AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.com'
+AWS_STORAGE_BUCKET_NAME = 'shop-django-rezaamin'
+AWS_SERVICE_NAME = 's3'
+AWS_S3_FILE_OVERWRITE =False
+AWS_LOCAL_STORAGE = f'{BASE_DIR}/aws/'
+
+
+# google account
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'parsa.ahmaripour@gmail.com'
+
+EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = 'rnuwqhrhcgkwxotx'
+
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Reza Web Shop'
+
+
+
+# multi language
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('fa', 'Persian'),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+
+]
+
+LANGUAGE_CODE = 'en-us'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+
+    ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '10/hr',
+        'user': '5/hr'
+    },
+    'PAGE_SIZE': 1,
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
